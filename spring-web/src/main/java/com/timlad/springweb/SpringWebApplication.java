@@ -8,10 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringWebApplication {
 
 	// Домашнее задание:
-	// 1. Добавить категории продуктов
-	// 2. Добавить фильтр по категориям
-	// 3. Разобраться в механизме работы корзин
-
+	// 1. Добавить к магазину возможность выгрузки всех товаров,
+	// и отдельных товаров по id через SOAP
 	public static void main(String[] args) {
 		SpringApplication.run(SpringWebApplication.class, args);
 
