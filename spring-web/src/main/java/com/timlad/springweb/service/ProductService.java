@@ -20,7 +20,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public Page<Product> find(Double minPrice, Double maxPrice, String partTitle, Integer page) {
+    public Page<Product> find(Double minPrice, Double maxPrice, String titlePart, Integer page, String categoryTitle) {
         Specification<Product> spec = Specification.where(null);
         if (minPrice != null) {
             spec = spec.and(ProductsSpecifications.priceGreaterOrEqualsThan(minPrice));
@@ -28,10 +28,13 @@ public class ProductService {
         if (maxPrice != null) {
             spec = spec.and(ProductsSpecifications.priceLessThanOrEqualsThan(maxPrice));
         }
-        if (partTitle != null) {
-            spec = spec.and(ProductsSpecifications.titleLike(partTitle));
+        if (titlePart != null) {
+            spec = spec.and(ProductsSpecifications.titleLike(titlePart));
         }
-        return productRepository.findAll(spec, PageRequest.of(page - 1, 10));
+        if (categoryTitle != null) {
+            spec = spec.and(ProductsSpecifications.categoryLike(categoryTitle));
+        }
+        return productRepository.findAll(spec, PageRequest.of(page - 1, 5));
     }
 
     public void deleteById(Long id) {
@@ -39,7 +42,7 @@ public class ProductService {
     }
 
     public Product save(Product product) {
-       return productRepository.save(product);
+        return productRepository.save(product);
     }
 
     public Optional<Product> findById(Long id) {

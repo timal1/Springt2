@@ -24,12 +24,13 @@ public class ProductController {
             @RequestParam(name = "number_page") Integer page,
             @RequestParam(name = "max_price", required = false) Double maxPrice,
             @RequestParam(name = "min_price", required = false) Double minPrice,
-            @RequestParam(name = "title_part", required = false) String titlePart
+            @RequestParam(name = "title_part", required = false) String titlePart,
+            @RequestParam(name = "category_part", required = false) String categoryTitle
     ) {
         if (page < 1) {
             page = 1;
         }
-        return productService.find(minPrice, maxPrice, titlePart, page).map(
+        return productService.find(minPrice, maxPrice, titlePart, page, categoryTitle).map(
                 p -> productConverter.entityToDto(p)
         );
     }

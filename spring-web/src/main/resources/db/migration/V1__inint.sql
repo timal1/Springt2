@@ -1,9 +1,16 @@
+create table if not exists categories (
+    id                  bigserial primary key,
+    title               varchar(255)
+);
+
 create table if not exists products (
     id                  bigserial primary key,
     title               varchar(255),
     price               double precision,
+    category_id         bigint references categories (id),
     created_at          timestamp default current_timestamp,
     updated_at          timestamp default current_timestamp
+
 );
 
 create table if not exists users (
@@ -49,25 +56,32 @@ create table order_items (
     updated_at          timestamp default current_timestamp
 );
 
-insert into products (title, price) values ('пальто', 200), ('брюки', 50),
-                                           ('ботинки', 100), ('куртка', 150),
-                                           ('рубашка', 40), ('платье', 75),
-                                           ('туфли', 80), ('носки', 5),
-                                           ('кофта', 35), ('шарф', 10),
-                                           ('футболка', 20), ('шапка', 25),
-                                           ('плащ', 170), ('майка', 10),
-                                           ('перчатки', 15), ('шорты', 20),
-                                           ('галстук', 10), ('сапоги', 60),
-                                           ('юбка', 55), ('блузка', 45);
+insert into categories(title) values ('верхняя одежда'),
+                                     ('легкая одежда'),
+                                     ('нижняя одежда'),
+                                     ('обувь'),
+                                     ('головной убор'),
+                                     ('аксессуары');
+
+insert into products (title, price, category_id) values ('пальто', 200, 1), ('брюки', 50, 2),
+                                           ('ботинки', 100, 4), ('куртка', 150, 1),
+                                           ('рубашка', 40, 2), ('платье', 75, 2),
+                                           ('туфли', 80, 4), ('носки', 5, 3),
+                                           ('кофта', 35, 2), ('шарф', 10, 6),
+                                           ('футболка', 20, 2), ('шапка', 25, 5),
+                                           ('плащ', 170, 1), ('майка', 10, 3),
+                                           ('перчатки', 15, 6), ('шорты', 20, 2),
+                                           ('галстук', 10, 6), ('сапоги', 60, 4),
+                                           ('юбка', 55, 2), ('блузка', 45, 2);
 
 insert into users (username, password, email) values ('Макс', '$2a$12$bxsUv8diiUMbh6v9kteb4eU5wHDwfiZCinje0/lsumm3opjEzLqNO', 'max@gmail.com'),
---                                                              password: 100
+--                                                              password 100
                                                      ('Иван', '$2a$12$D09ANPAG9LHiY.Wz98ExLem.UV4a4CShTsjgMuKGLJE68cT36VKFK', 'ivan@gmail.com'),
---                                                              password: 200
+--                                                              password 200
                                                      ('Анна', '$2a$12$2vd4Q0KOzW00offp1l/pueV2A1x5Q2FPqG3sn4kOx4pxrjKpOs9Pe', 'anna@gmail.com'),
---                                                              password: 300
+--                                                              password 300
                                                      ('Егор', '$2a$12$8E2Ol6kZEtarGmx1.LXQ1ubb.uQ5/B7vtcmIJa8UsIA8.I/oZI/Ma', 'egor@gmail.com');
---                                                              password: 400
+--                                                              password 400
 
 insert into roles (name) values ('ROLE_SUPERADMIN'), ('ROLE_ADMIN'), ('ROLE_MANAGER'), ('ROLE_USER');
 

@@ -29,6 +29,10 @@ public class Product {
     @Column(name = "price")
     private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryProduct category;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -37,9 +41,10 @@ public class Product {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Product(Long id, String title, double price) {
+    public Product(Long id, String title, double price, String category) {
         this.id = id;
         this.title = title;
         this.price = price;
+        this.category = new CategoryProduct(category);
     }
 }

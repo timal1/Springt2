@@ -1,7 +1,5 @@
 package com.timlad.springweb.dto;
 
-import com.timlad.springweb.entities.Product;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,10 +12,13 @@ public class ProductDto {
     private double price;
     private Integer amount;
 
-    public ProductDto(Long id, String title, double price) {
+    private String category;
+
+    public ProductDto(Long id, String title, double price, String category) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.amount = 1;
+        this.category = category;
     }
 }
