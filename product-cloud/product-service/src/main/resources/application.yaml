@@ -1,0 +1,29 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: product-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: cloud-postgres
+    password: cloud-postgres
+    url: jdbc:postgresql://192.168.99.101:5432/cloud-postgres
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        ddl-auto: update
+
+    show-sql: true
+    generate-ddl: true
+    database: postgresql
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      fetchRegistry: false

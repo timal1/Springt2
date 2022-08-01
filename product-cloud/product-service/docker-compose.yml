@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db-cloud
+    environment:
+      - POSTGRES_USER=cloud-postgres
+      - POSTGRES_PASSWORD=cloud-postgres
+    ports:
+     - 5432:5432
+    volumes:
+      - data_pg:/var/lib/postgresql/data
+
+volumes:
+  data_pg:
